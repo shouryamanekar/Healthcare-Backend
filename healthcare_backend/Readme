@@ -1,0 +1,132 @@
+# Healthcare Backend
+
+This is a Django-based backend for a healthcare management system. It provides APIs for managing users, patients, doctors, and their relationships. The project uses Django REST Framework (DRF) for building RESTful APIs and JWT for authentication.
+
+## Features
+
+- User registration and authentication using JWT.
+- CRUD operations for patients and doctors.
+- Mapping between patients and doctors.
+- Swagger and Redoc API documentation.
+- PostgreSQL database integration.
+
+---
+
+## Table of Contents
+
+1. [Setup Instructions](#setup-instructions)
+2. [Environment Variables](#environment-variables)
+3. [API Documentation](#api-documentation)
+4. [Testing](#testing)
+5. [Project Structure](#project-structure)
+
+---
+
+## Setup Instructions
+
+### Prerequisites
+
+- Python 3.10 or higher
+- PostgreSQL
+- Virtual environment tool (e.g., `venv` or `virtualenv`)
+
+### Steps
+
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/your-repo/healthcare-backend.git
+   cd healthcare-backend
+   ```
+
+2. **Create and Activate a Virtual Environment**
+   ```bash
+   python -m venv env
+   env\Scripts\activate  # On Windows
+   ```
+
+3. **Install Dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Set Up Environment Variables**
+   Create a `.env` file in the root directory and configure it as shown in the [Environment Variables](#environment-variables) section.
+
+5. **Apply Migrations**
+   ```bash
+   python manage.py migrate
+   ```
+
+6. **Run the Development Server**
+   ```bash
+   python manage.py runserver
+   ```
+
+7. **Access the Application**
+   - Admin Panel: [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/)
+   - Swagger API Docs: [http://127.0.0.1:8000/swagger/](http://127.0.0.1:8000/swagger/)
+   - Redoc API Docs: [http://127.0.0.1:8000/redoc/](http://127.0.0.1:8000/redoc/)
+
+---
+
+## Environment Variables
+
+The project uses a `.env` file to manage sensitive configurations. Below is an example `.env` file:
+
+```plaintext
+SECRET_KEY="your-secret-key"
+DEBUG=True
+ALLOWED_HOSTS="localhost,127.0.0.1"
+DB_NAME=healthcare_db
+DB_USER=postgres
+DB_PASSWORD=postgres
+DB_HOST=localhost
+DB_PORT=5432
+```
+
+---
+
+## API Documentation
+
+### Authentication
+
+- **Register**: `POST /api/auth/register/`
+- **Login**: `POST /api/auth/login/`
+- **Token Refresh**: `POST /api/auth/refresh/`
+
+### Patients
+
+- **List/Create Patients**: `GET/POST /api/patients/`
+- **Retrieve/Update/Delete Patient**: `GET/PUT/DELETE /api/patients/<id>/`
+
+### Doctors
+
+- **List/Create Doctors**: `GET/POST /api/doctors/`
+- **Retrieve/Update/Delete Doctor**: `GET/PUT/DELETE /api/doctors/<id>/`
+
+### Mappings
+
+- **List Mappings**: `GET /api/patients/mappings/`
+- **Create Mapping**: `POST /api/patients/mappings/create/`
+- **List Doctors for a Patient**: `GET /api/patients/mappings/<patient_id>/`
+- **Delete Mapping**: `DELETE /api/patients/mappings/delete/<id>/`
+
+---
+
+## Project Structure
+
+```
+healthcare_backend/
+├── apps/
+│   ├── accounts/
+│   ├── doctors/
+│   └── patients/
+├── config/
+│   ├── settings/
+│   ├── urls.py
+│   ├── wsgi.py
+│   └── asgi.py
+├── utils/
+├── manage.py
+└── requirements.txt
+```
